@@ -1,0 +1,16 @@
+# Local editor / tooling config (also contains machine-specific absolute paths)
+.claude/
+
+# Internal notes. A public GitHub repo renders README.md on the repo homepage,
+# and this one carries the pre-launch checklist — including the notes that the
+# headline figures are placeholders, the photos are stock, and the enquiry form
+# still needs activating. Keep it on your machine.
+# If you'd rather publish it, delete this line and commit it.
+README.md
+
+# Build/upload artefacts
+*.zip
+node_modules/
+.DS_Store
+Thumbs.db
+*.log

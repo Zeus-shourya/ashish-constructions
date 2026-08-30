@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Shivani Properties">
+  <title>Shivani Properties</title>
+  <defs>
+    <linearGradient id="spGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E2C069"/>
+      <stop offset="1" stop-color="#A6832A"/>
+    </linearGradient>
+    <linearGradient id="spRoof" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#CCA43B"/>
+      <stop offset="1" stop-color="#8A6C1F"/>
+    </linearGradient>
+  </defs>
+
+  <g fill="url(#spGold)">
+    <rect x="30" y="46" width="9" height="66" rx="1.5"/>
+    <rect x="43" y="38" width="9" height="74" rx="1.5"/>
+    <rect x="56" y="30" width="9" height="82" rx="1.5"/>
+    <rect x="69" y="38" width="9" height="74" rx="1.5"/>
+    <rect x="82" y="46" width="9" height="66" rx="1.5"/>
+  </g>
+
+  <path d="M64 8 L106 40 L106 52 L64 22 L22 52 L22 40 Z" fill="url(#spRoof)"/>
+
+  <rect x="55" y="60" width="18" height="18" rx="2" fill="#93A3B1"/>
+  <rect x="63" y="60" width="2" height="18" fill="#242F40" opacity=".8"/>
+  <rect x="55" y="68" width="18" height="2" fill="#242F40" opacity=".8"/>
+
+  <rect x="18" y="112" width="92" height="7" rx="3.5" fill="url(#spRoof)"/>
+</svg>

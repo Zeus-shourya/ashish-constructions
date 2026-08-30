@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Ashish Constructions">
+  <title>Ashish Constructions</title>
+  <defs>
+    <linearGradient id="acSteel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#B9C6D1"/>
+      <stop offset="1" stop-color="#7C8D9C"/>
+    </linearGradient>
+    <linearGradient id="acGold" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#A6832A"/>
+      <stop offset="1" stop-color="#E2C069"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="10" y="108" width="108" height="5" rx="2.5" fill="url(#acGold)"/>
+
+  <rect x="16" y="72" width="24" height="36" fill="url(#acSteel)"/>
+  <g fill="#242F40" opacity=".85">
+    <rect x="20" y="77" width="6" height="3"/><rect x="30" y="77" width="6" height="3"/>
+    <rect x="20" y="84" width="6" height="3"/><rect x="30" y="84" width="6" height="3"/>
+    <rect x="20" y="91" width="6" height="3"/><rect x="30" y="91" width="6" height="3"/>
+    <rect x="20" y="98" width="6" height="3"/><rect x="30" y="98" width="6" height="3"/>
+  </g>
+
+  <rect x="46" y="52" width="26" height="56" fill="url(#acSteel)"/>
+  <g fill="#242F40" opacity=".85">
+    <rect x="50" y="58" width="7" height="3"/><rect x="61" y="58" width="7" height="3"/>
+    <rect x="50" y="65" width="7" height="3"/><rect x="61" y="65" width="7" height="3"/>
+    <rect x="50" y="72" width="7" height="3"/><rect x="61" y="72" width="7" height="3"/>
+    <rect x="50" y="79" width="7" height="3"/><rect x="61" y="79" width="7" height="3"/>
+    <rect x="50" y="86" width="7" height="3"/><rect x="61" y="86" width="7" height="3"/>
+    <rect x="50" y="93" width="7" height="3"/><rect x="61" y="93" width="7" height="3"/>
+    <rect x="50" y="100" width="7" height="3"/><rect x="61" y="100" width="7" height="3"/>
+  </g>
+
+  <rect x="78" y="36" width="26" height="72" fill="url(#acSteel)"/>
+  <g fill="#242F40" opacity=".85">
+    <rect x="82" y="42" width="7" height="3"/><rect x="93" y="42" width="7" height="3"/>
+    <rect x="82" y="49" width="7" height="3"/><rect x="93" y="49" width="7" height="3"/>
+    <rect x="82" y="56" width="7" height="3"/><rect x="93" y="56" width="7" height="3"/>
+    <rect x="82" y="63" width="7" height="3"/><rect x="93" y="63" width="7" height="3"/>
+    <rect x="82" y="70" width="7" height="3"/><rect x="93" y="70" width="7" height="3"/>
+    <rect x="82" y="77" width="7" height="3"/><rect x="93" y="77" width="7" height="3"/>
+    <rect x="82" y="84" width="7" height="3"/><rect x="93" y="84" width="7" height="3"/>
+    <rect x="82" y="91" width="7" height="3"/><rect x="93" y="91" width="7" height="3"/>
+    <rect x="82" y="98" width="7" height="3"/><rect x="93" y="98" width="7" height="3"/>
+  </g>
+
+  <path d="M14 100 L104 22" stroke="url(#acGold)" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <path d="M112 14 L86 22 L104 40 Z" fill="#CCA43B"/>
+</svg>
