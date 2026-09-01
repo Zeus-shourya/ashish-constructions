@@ -1,7 +1,11 @@
 /* ==========================================================================
    Ashish Constructions — shared stylesheet
-   Golden-black theme.  Palette: #242F40 · #363636 · #CCA43B · #93A3B1 · #FFFFFF
-   Brand switch: <body data-brand="shivani">
+   Palette: #242F40 navy · #363636 charcoal · #CCA43B gold · #93A3B1 steel · #FFF
+
+   Layout of the theme: light content sections, dark feature bands.
+   Anything carrying class .on-dark flips the text tokens and paints a deep
+   navy (or charcoal, on the Shivani page) background — hero, Why Choose Us,
+   the quote band and the footer. Everything else is light.
    ========================================================================== */
 
 /* ---------- tokens ---------- */
@@ -13,24 +17,25 @@
   --steel:      #93A3B1;
   --white:      #FFFFFF;
 
-  /* derived surfaces — Ashish Constructions runs navy-black */
-  --bg:         #242F40;   /* page base                     */
-  --bg-2:       #1C2432;   /* alternating / recessed band   */
-  --bg-3:       #2D3A4E;   /* raised card                   */
-  --bg-deep:    #151B26;   /* hero, footer, deepest panels  */
+  /* light content surfaces */
+  --bg:         #F4F6F8;   /* page base                      */
+  --bg-2:       #FFFFFF;   /* alternating band               */
+  --bg-3:       #FFFFFF;   /* raised card                    */
+  --bg-deep:    #242F40;   /* the dark feature bands          */
 
   --gold-light: #E2C069;
   --gold-deep:  #A6832A;
+  --gold-ink:   #8A6C1F;   /* gold text that must pass on white */
   --accent:     var(--gold);
   --accent-soft:var(--gold-light);
 
-  /* type colours */
-  --ink:        #FFFFFF;
-  --ink-soft:   #C3CDD6;
-  --muted:      #93A3B1;
+  /* type colours (light context) */
+  --ink:        #242F40;
+  --ink-soft:   #4E5D70;
+  --muted:      #78889A;
 
-  --line:       rgba(147,163,177,.18);
-  --line-gold:  rgba(204,164,59,.30);
+  --line:       rgba(36,47,64,.13);
+  --line-gold:  rgba(204,164,59,.45);
 
   /* layout */
   --wrap: 1200px;
@@ -42,26 +47,38 @@
   --f-display: "Fraunces", "Georgia", "Times New Roman", serif;
   --f-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
-  --shadow-sm: 0 1px 2px rgba(0,0,0,.35), 0 4px 12px rgba(0,0,0,.25);
-  --shadow-md: 0 4px 12px rgba(0,0,0,.35), 0 18px 44px rgba(0,0,0,.35);
-  --shadow-lg: 0 10px 26px rgba(0,0,0,.4), 0 36px 80px rgba(0,0,0,.45);
-  --glow-gold: 0 0 0 1px rgba(204,164,59,.35), 0 10px 34px rgba(204,164,59,.14);
+  --shadow-sm: 0 1px 2px rgba(36,47,64,.06), 0 4px 12px rgba(36,47,64,.06);
+  --shadow-md: 0 4px 12px rgba(36,47,64,.08), 0 18px 44px rgba(36,47,64,.10);
+  --shadow-lg: 0 10px 26px rgba(36,47,64,.10), 0 36px 80px rgba(36,47,64,.16);
+  --glow-gold: 0 0 0 1px rgba(204,164,59,.5), 0 10px 30px rgba(204,164,59,.28);
 
   --nav-h: 74px;
   --ease: cubic-bezier(.22,.61,.36,1);
 }
 
-/* Shivani Properties keeps the same golden-black language, shifted onto the
-   charcoal end of the palette so the two pages are siblings, not clones. */
+/* Shivani Properties: same system, charcoal instead of navy on the dark bands */
 body[data-brand="shivani"] {
-  --bg:      #2E2E2E;
-  --bg-2:    #262626;
-  --bg-3:    #3B3B3B;
-  --bg-deep: #1B1B1B;
-  --ink-soft:#D2CCC0;
-  --muted:   #A39A8C;
-  --line:    rgba(204,164,59,.16);
+  --bg-deep: #2E2E2E;
+  --ink:     #2B2B2B;
+  --ink-soft:#55524C;
+  --muted:   #7E7871;
+  --line:    rgba(43,43,43,.13);
 }
+
+/* ---- the dark feature bands ------------------------------------------- */
+.on-dark {
+  --ink:       #FFFFFF;
+  --ink-soft:  #C9D3DC;
+  --muted:     #93A3B1;
+  --gold-ink:  var(--gold);
+  --line:      rgba(255,255,255,.15);
+  --line-gold: rgba(204,164,59,.38);
+  --bg-3:      rgba(255,255,255,.05);
+  --shadow-lg: 0 10px 26px rgba(0,0,0,.35), 0 36px 80px rgba(0,0,0,.4);
+  background: var(--bg-deep);
+  color: var(--ink);
+}
+body[data-brand="shivani"] .on-dark { --ink-soft: #D6D0C6; --muted: #A39A8C; }
 
 /* ---------- reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
@@ -89,15 +106,12 @@ strong { color: var(--ink); font-weight: 600; }
 
 ::selection { background: var(--gold); color: #1B2230; }
 
-:focus-visible {
-  outline: 3px solid var(--gold);
-  outline-offset: 3px;
-  border-radius: 4px;
-}
+:focus-visible { outline: 3px solid var(--gold-deep); outline-offset: 3px; border-radius: 4px; }
+.on-dark :focus-visible { outline-color: var(--gold); }
 
 .skip-link {
   position: absolute; left: 50%; top: -100px; transform: translateX(-50%);
-  z-index: 999; background: var(--gold); color: #1B2230;
+  z-index: 999; background: var(--navy); color: #fff;
   padding: .85rem 1.5rem; border-radius: 0 0 var(--radius-sm) var(--radius-sm);
   font-size: .9rem; font-weight: 700;
 }
@@ -117,7 +131,7 @@ strong { color: var(--ink); font-weight: 600; }
 .eyebrow {
   display: inline-flex; align-items: center; gap: .7rem;
   font-size: .74rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 1.1rem;
+  color: var(--gold-ink); margin-bottom: 1.1rem;
 }
 .eyebrow::before { content: ""; width: 34px; height: 2px; background: currentColor; }
 
@@ -125,10 +139,7 @@ strong { color: var(--ink); font-weight: 600; }
 .h-lg { font-size: clamp(1.85rem, 4vw, 2.9rem); }
 .h-md { font-size: clamp(1.3rem, 2.3vw, 1.7rem); }
 .lead { font-size: clamp(1rem, 1.5vw, 1.14rem); color: var(--ink-soft); max-width: 62ch; }
-.accent-italic { font-family: var(--f-display); font-style: italic; font-weight: 400; color: var(--gold); }
-
-/* thin gold rule used to break up the long dark run */
-.section + .section { border-top: 1px solid var(--line); }
+.accent-italic { font-family: var(--f-display); font-style: italic; font-weight: 400; color: var(--gold-ink); }
 
 /* ---------- buttons ---------- */
 .btn {
@@ -142,17 +153,23 @@ strong { color: var(--ink); font-weight: 600; }
 .btn:hover { transform: translateY(-2px); }
 .btn:active { transform: translateY(0); }
 
-.btn--solid { background: var(--gold); color: #1B2230; box-shadow: var(--shadow-sm); }
+.btn--solid { background: var(--gold); color: #22201A; box-shadow: var(--shadow-sm); }
 .btn--solid:hover { background: var(--gold-light); box-shadow: var(--glow-gold); }
 
-.btn--brand { background: var(--gold); color: #1B2230; box-shadow: var(--shadow-sm); }
-.btn--brand:hover { background: var(--gold-light); box-shadow: var(--glow-gold); }
+.btn--brand { background: var(--navy); color: #fff; box-shadow: var(--shadow-sm); }
+.btn--brand:hover { background: #32415A; box-shadow: var(--shadow-md); }
+body[data-brand="shivani"] .btn--brand { background: var(--charcoal); }
+body[data-brand="shivani"] .btn--brand:hover { background: #4A4A4A; }
 
-.btn--ghost { border-color: rgba(255,255,255,.4); color: #fff; }
-.btn--ghost:hover { border-color: var(--gold); color: var(--gold); background: rgba(204,164,59,.08); }
+.btn--ghost { border-color: rgba(255,255,255,.45); color: #fff; }
+.btn--ghost:hover { border-color: var(--gold); color: var(--gold); background: rgba(204,164,59,.12); }
 
-.btn--outline { border-color: var(--gold); color: var(--gold); }
-.btn--outline:hover { background: var(--gold); color: #1B2230; }
+.btn--outline { border-color: var(--navy); color: var(--navy); }
+.btn--outline:hover { background: var(--navy); color: #fff; }
+body[data-brand="shivani"] .btn--outline { border-color: var(--charcoal); color: var(--charcoal); }
+body[data-brand="shivani"] .btn--outline:hover { background: var(--charcoal); color: #fff; }
+.on-dark .btn--outline { border-color: var(--gold); color: var(--gold); }
+.on-dark .btn--outline:hover { background: var(--gold); color: #22201A; }
 
 .btn--block { width: 100%; }
 
@@ -182,7 +199,7 @@ html.js-reveal .reveal[data-delay="4"] { transition-delay: .36s; }
 }
 
 /* ==========================================================================
-   NAVIGATION  — with a real mobile drawer (the reference site has none)
+   NAVIGATION  — transparent over the hero, light glass once scrolled
    ========================================================================== */
 .nav {
   position: fixed; inset: 0 0 auto 0; z-index: 100;
@@ -195,13 +212,11 @@ html.js-reveal .reveal[data-delay="4"] { transition-delay: .36s; }
   width: min(var(--wrap), 100%); margin-inline: auto; padding-inline: var(--gut);
   display: flex; align-items: center; gap: 1rem;
 }
-
 .nav.is-stuck {
-  background: rgba(21,27,38,.9);
+  background: rgba(255,255,255,.94);
   backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 1px 0 var(--line-gold), var(--shadow-sm);
+  box-shadow: 0 1px 0 var(--line), var(--shadow-sm);
 }
-body[data-brand="shivani"] .nav.is-stuck { background: rgba(27,27,27,.9); }
 
 /* The wordmark never shrinks and never clips — if the row runs out of room the
    nav gives way (and .nav--tight below drops the CTA), not the company name. */
@@ -215,13 +230,17 @@ body[data-brand="shivani"] .nav.is-stuck { background: rgba(27,27,27,.9); }
 .brand__name em { font-style: normal; color: var(--gold); }
 .brand__tag {
   font-size: .56rem; letter-spacing: .2em; text-transform: uppercase;
-  color: var(--muted); white-space: nowrap; margin-top: 2px;
+  color: rgba(255,255,255,.72); white-space: nowrap; margin-top: 2px;
 }
+.nav.is-stuck .brand__name { color: var(--navy); }
+.nav.is-stuck .brand__name em { color: var(--gold-ink); }
+.nav.is-stuck .brand__tag { color: var(--muted); }
+body[data-brand="shivani"] .nav.is-stuck .brand__name { color: var(--charcoal); }
 
 .nav__links { display: flex; align-items: center; gap: 1.15rem; flex: none; }
 .nav__link {
   position: relative; font-size: .72rem; font-weight: 600;
-  letter-spacing: .11em; text-transform: uppercase; color: rgba(255,255,255,.86);
+  letter-spacing: .11em; text-transform: uppercase; color: rgba(255,255,255,.88);
   padding: .45rem 0; white-space: nowrap; transition: color .25s var(--ease);
 }
 .nav__link::after {
@@ -232,6 +251,9 @@ body[data-brand="shivani"] .nav.is-stuck { background: rgba(27,27,27,.9); }
 .nav__link:hover { color: var(--gold); }
 .nav__link:hover::after, .nav__link[aria-current="page"]::after { transform: scaleX(1); }
 .nav__link[aria-current="page"] { color: var(--gold); }
+.nav.is-stuck .nav__link { color: var(--ink-soft); }
+.nav.is-stuck .nav__link:hover, .nav.is-stuck .nav__link[aria-current="page"] { color: var(--gold-ink); }
+.nav.is-stuck .nav__link::after { background: var(--gold-deep); }
 
 .nav__cta { margin-left: .6rem; padding: .68rem 1.05rem; font-size: .68rem; }
 /* set by JS only if the row genuinely cannot fit — the CTA is the cheapest
@@ -241,26 +263,24 @@ body[data-brand="shivani"] .nav.is-stuck { background: rgba(27,27,27,.9); }
 /* ---- featured link: Shivani Properties ----------------------------------
    A single gold segment travelling the perimeter of the box. Built as a
    conic gradient rotated through a registered custom property and masked to
-   a 2px ring, so the bright arc walks the rectangle rather than spinning a
-   disc behind it.                                                          */
+   a ring, so the bright arc walks the rectangle rather than spinning a disc
+   behind it.                                                               */
 @property --ac-angle {
   syntax: "<angle>";
   initial-value: 0deg;
   inherits: false;
 }
-
 .nav__link--feature {
   padding: .5rem .85rem;
   border-radius: 7px;
   color: var(--gold);
-  overflow: hidden;                 /* keeps the arc inside the corners */
-  /* The static rail lives on the element itself, not the pseudo-element, so
-     the box still reads as a box if the animated ring is unsupported. */
-  box-shadow: inset 0 0 0 1.5px rgba(204,164,59,.26);
+  overflow: hidden;
+  /* static rail on the element itself, so the box still reads as a box if the
+     animated ring is unsupported */
+  box-shadow: inset 0 0 0 1.5px rgba(204,164,59,.4);
 }
-.nav__link--feature::after { display: none; }   /* no underline on this one */
-
-/* the travelling arc, layered over that rail */
+.nav.is-stuck .nav__link--feature { color: var(--gold-ink); box-shadow: inset 0 0 0 1.5px rgba(204,164,59,.55); }
+.nav__link--feature::after { display: none; }
 .nav__link--feature::before {
   content: "";
   position: absolute; inset: 0;
@@ -268,13 +288,13 @@ body[data-brand="shivani"] .nav.is-stuck { background: rgba(27,27,27,.9); }
   padding: 1.5px;
   background:
     conic-gradient(from var(--ac-angle),
-      rgba(204,164,59,.22) 0turn,
-      rgba(204,164,59,.22) .58turn,
+      transparent 0turn,
+      transparent .58turn,
       var(--gold) .70turn,
       #FFF0C4 .75turn,
       var(--gold) .80turn,
-      rgba(204,164,59,.22) .92turn,
-      rgba(204,164,59,.22) 1turn);
+      transparent .92turn,
+      transparent 1turn);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
           mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
@@ -282,41 +302,32 @@ body[data-brand="shivani"] .nav.is-stuck { background: rgba(27,27,27,.9); }
   animation: ac-orbit 3.4s linear infinite;
 }
 @keyframes ac-orbit { to { --ac-angle: 360deg; } }
+.nav__link--feature:hover { background: rgba(204,164,59,.12); }
 
-.nav__link--feature:hover { color: #FFF0C4; background: rgba(204,164,59,.10); }
-
-/* No motion: drop the travelling arc and leave a solid gold rail, so the link
-   is still clearly the highlighted one. */
+/* No motion: solid gold rail instead of a travelling arc */
 @media (prefers-reduced-motion: reduce) {
   .nav__link--feature { box-shadow: inset 0 0 0 1.5px var(--gold); }
   .nav__link--feature::before { display: none; }
 }
 
-/* same treatment on the drawer entry, where mobile visitors actually see it */
-.drawer__link--feature { color: var(--gold); }
-.drawer__link--feature .drawer__flag {
-  display: inline-flex; align-items: center; gap: .4rem;
-  font-family: var(--f-body); font-size: .58rem; font-weight: 700;
-  letter-spacing: .18em; text-transform: uppercase;
-  color: var(--gold); opacity: .85;
-}
-
 /* hamburger */
 .nav__toggle {
   display: none; width: 46px; height: 46px; flex: none;
-  background: transparent; border: 1px solid var(--line-gold);
+  background: transparent; border: 1px solid rgba(255,255,255,.4);
   border-radius: var(--radius-sm); cursor: pointer;
   align-items: center; justify-content: center;
 }
-.nav__toggle-bars { position: relative; width: 20px; height: 2px; background: var(--gold); border-radius: 2px; }
+.nav.is-stuck .nav__toggle { border-color: var(--line); }
+.nav__toggle-bars { position: relative; width: 20px; height: 2px; background: #fff; border-radius: 2px; }
 .nav__toggle-bars::before, .nav__toggle-bars::after {
   content: ""; position: absolute; left: 0; width: 20px; height: 2px;
   background: inherit; border-radius: 2px;
 }
 .nav__toggle-bars::before { top: -6px; }
 .nav__toggle-bars::after  { top: 6px; }
+.nav.is-stuck .nav__toggle-bars { background: var(--navy); }
 
-/* mobile drawer */
+/* mobile drawer — always dark */
 .drawer {
   position: fixed; inset: 0; z-index: 120;
   background: var(--bg-deep);
@@ -330,7 +341,7 @@ body[data-brand="shivani"] .nav.is-stuck { background: rgba(27,27,27,.9); }
 .drawer__top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; }
 .drawer__close {
   width: 46px; height: 46px; border-radius: var(--radius-sm); cursor: pointer;
-  background: rgba(204,164,59,.1); border: 1px solid var(--line-gold);
+  background: rgba(204,164,59,.12); border: 1px solid rgba(204,164,59,.38);
   color: var(--gold); font-size: 1.4rem; line-height: 1; display: grid; place-items: center;
 }
 .drawer__links { display: flex; flex-direction: column; }
@@ -338,23 +349,24 @@ body[data-brand="shivani"] .nav.is-stuck { background: rgba(27,27,27,.9); }
   display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
   padding: 1.05rem .25rem; color: #fff;
   font-family: var(--f-display); font-size: 1.45rem; font-weight: 600;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid rgba(255,255,255,.14);
 }
 .drawer__link:hover { color: var(--gold); }
-.drawer__link span { font-family: var(--f-body); font-size: .66rem; letter-spacing: .18em; color: var(--gold); opacity: .75; }
+.drawer__link span { font-family: var(--f-body); font-size: .66rem; letter-spacing: .18em; color: var(--gold); opacity: .8; }
+.drawer__link--feature { color: var(--gold); }
+.drawer__flag {
+  display: inline-flex; align-items: center;
+  font-family: var(--f-body); font-size: .58rem; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--gold);
+}
 .drawer__foot { margin-top: auto; padding-top: 2.2rem; display: grid; gap: .85rem; }
-.drawer__contact { color: var(--ink-soft); font-size: .95rem; display: flex; align-items: center; gap: .65rem; }
+.drawer__contact { color: rgba(255,255,255,.82); font-size: .95rem; display: flex; align-items: center; gap: .65rem; }
 .drawer__contact:hover { color: var(--gold); }
 .drawer__contact svg { width: 18px; height: 18px; flex: none; color: var(--gold); }
 
 body.no-scroll { overflow: hidden; }
 
-/* The horizontal nav only survives while brand + links + CTA genuinely fit.
-   Below that it hands over to the drawer rather than letting the wordmark
-   collide with the first link. */
-@media (max-width: 1240px) {
-  :root { --gut: clamp(1.1rem, 3vw, 2.25rem); }
-}
+@media (max-width: 1240px) { :root { --gut: clamp(1.1rem, 3vw, 2.25rem); } }
 @media (max-width: 1180px) {
   .nav__links, .nav__cta { display: none; }
   .nav__toggle { display: flex; }
@@ -367,13 +379,12 @@ body.no-scroll { overflow: hidden; }
 }
 
 /* ==========================================================================
-   HERO
+   HERO — a dark band
    ========================================================================== */
 .hero {
   position: relative; min-height: 100svh;
   display: flex; align-items: center;
   padding-top: var(--nav-h);
-  background: var(--bg-deep);
   overflow: hidden; isolation: isolate;
 }
 @supports not (min-height: 100svh) { .hero { min-height: 100vh; } }
@@ -384,9 +395,9 @@ body.no-scroll { overflow: hidden; }
 .hero__fallback {
   position: absolute; inset: 0; z-index: -3;
   background:
-    radial-gradient(120% 90% at 78% 10%, rgba(204,164,59,.22), transparent 58%),
-    radial-gradient(90% 70% at 10% 92%, rgba(147,163,177,.16), transparent 62%),
-    linear-gradient(160deg, var(--bg) 0%, var(--bg-deep) 60%, #0E131C 100%);
+    radial-gradient(120% 90% at 78% 10%, rgba(204,164,59,.26), transparent 58%),
+    radial-gradient(90% 70% at 10% 92%, rgba(147,163,177,.2), transparent 62%),
+    linear-gradient(160deg, #2B3A50 0%, var(--bg-deep) 62%, #161E2B 100%);
 }
 .hero__fallback::after {
   content: ""; position: absolute; inset: 0; opacity: .45;
@@ -402,49 +413,49 @@ body.no-scroll { overflow: hidden; }
   position: absolute; inset: 0;
   background-size: cover; background-position: center;
   opacity: 0; transition: opacity 1.4s var(--ease);
-  filter: saturate(.75) contrast(1.05);
 }
 .hero__slide.is-active { opacity: 1; }
 .hero__scrim {
   position: absolute; inset: 0; z-index: -1;
   background:
-    linear-gradient(90deg, rgba(21,27,38,.95) 0%, rgba(21,27,38,.82) 44%, rgba(21,27,38,.4) 100%),
-    linear-gradient(to top, rgba(11,15,22,.92) 0%, transparent 48%);
+    linear-gradient(90deg, rgba(26,35,49,.92) 0%, rgba(26,35,49,.76) 46%, rgba(26,35,49,.34) 100%),
+    linear-gradient(to top, rgba(18,24,34,.9) 0%, transparent 50%);
 }
 body[data-brand="shivani"] .hero__scrim {
   background:
-    linear-gradient(90deg, rgba(27,27,27,.95) 0%, rgba(27,27,27,.82) 44%, rgba(27,27,27,.4) 100%),
-    linear-gradient(to top, rgba(15,15,15,.92) 0%, transparent 48%);
+    linear-gradient(90deg, rgba(30,30,30,.92) 0%, rgba(30,30,30,.76) 46%, rgba(30,30,30,.34) 100%),
+    linear-gradient(to top, rgba(20,20,20,.9) 0%, transparent 50%);
 }
 
 .hero__inner {
   width: min(var(--wrap), 100%); margin-inline: auto;
   padding-inline: var(--gut); padding-block: 3.5rem 7rem;
 }
+.hero .eyebrow { color: var(--gold); }
 .hero h1 { color: #fff; max-width: 17ch; margin-bottom: 1.5rem; }
-.hero h1 .accent-italic { display: block; }
+.hero h1 .accent-italic { display: block; color: var(--gold); }
 .hero__lead { color: var(--ink-soft); max-width: 54ch; font-size: clamp(1rem, 1.6vw, 1.15rem); margin-bottom: 2.4rem; }
 .hero__actions { display: flex; flex-wrap: wrap; gap: .9rem; }
 
 .hero__dots { display: flex; gap: .55rem; margin-top: 2.8rem; }
 .hero__dot {
   width: 32px; height: 3px; border: 0; padding: 0; cursor: pointer; border-radius: 2px;
-  background: rgba(255,255,255,.28); transition: background-color .3s var(--ease);
+  background: rgba(255,255,255,.3); transition: background-color .3s var(--ease);
 }
 .hero__dot.is-active { background: var(--gold); }
 
 .hero__meta {
   position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
   border-top: 1px solid var(--line-gold);
-  background: rgba(21,27,38,.55);
+  background: rgba(20,27,38,.55);
   backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
 }
-body[data-brand="shivani"] .hero__meta { background: rgba(27,27,27,.55); }
+body[data-brand="shivani"] .hero__meta { background: rgba(25,25,25,.55); }
 .hero__meta-grid {
   width: min(var(--wrap), 100%); margin-inline: auto; padding: 1.05rem var(--gut);
   display: grid; grid-template-columns: repeat(4, 1fr); gap: .9rem 1rem;
 }
-.hero__meta-item { display: flex; align-items: center; gap: .6rem; color: var(--ink-soft); font-size: .82rem; }
+.hero__meta-item { display: flex; align-items: center; gap: .6rem; color: rgba(255,255,255,.9); font-size: .82rem; }
 .hero__meta-item svg { width: 19px; height: 19px; flex: none; color: var(--gold); }
 @media (max-width: 760px) {
   .hero__meta-grid { grid-template-columns: repeat(2, 1fr); }
@@ -466,40 +477,38 @@ body[data-brand="shivani"] .hero__meta { background: rgba(27,27,27,.55); }
   margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--line);
   display: flex; align-items: center; gap: 1rem;
 }
-.about__signature-name { font-family: var(--f-display); font-size: 1.05rem; font-weight: 600; color: var(--gold); }
+.about__signature-name { font-family: var(--f-display); font-size: 1.05rem; font-weight: 600; color: var(--gold-ink); }
 .about__signature-role { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
 
 .about__figure { position: relative; }
 .about__figure::before {
   content: ""; position: absolute; inset: 0; border-radius: var(--radius);
-  background: linear-gradient(150deg, var(--bg-3), var(--bg-deep));
+  background: linear-gradient(150deg, #E3E8EE, #C9D3DC);
 }
 .about__figure img {
   position: relative; width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
   border-radius: var(--radius); box-shadow: var(--shadow-lg);
-  border: 1px solid var(--line-gold);
 }
 .about__badge {
   position: absolute; right: -14px; bottom: -14px; z-index: 2;
-  background: var(--gold); color: #1B2230;
+  background: var(--gold); color: #22201A;
   padding: 1.2rem 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow-lg);
   max-width: 62%;
 }
-.about__badge strong { display: block; font-family: var(--f-display); font-size: 1.6rem; line-height: 1; color: #1B2230; }
-.about__badge span { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(27,34,48,.75); font-weight: 600; }
+.about__badge strong { display: block; font-family: var(--f-display); font-size: 1.6rem; line-height: 1; color: #22201A; }
+.about__badge span { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(34,32,26,.78); font-weight: 600; }
 @media (max-width: 520px) { .about__badge { right: 0; bottom: -10px; padding: 1rem 1.15rem; } }
 
 .stats {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 1rem; margin-top: clamp(3rem, 6vw, 4.5rem);
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 1.6rem 1rem; margin-top: clamp(3rem, 6vw, 4.5rem);
   border-top: 1px solid var(--line); padding-top: clamp(2rem, 4vw, 3rem);
 }
-@media (max-width: 760px) { .stats { grid-template-columns: repeat(2, 1fr); gap: 1.8rem 1rem; } }
 .stat__num {
   font-family: var(--f-display); font-size: clamp(1.9rem, 4vw, 2.7rem);
-  font-weight: 600; color: #fff; line-height: 1;
+  font-weight: 600; color: var(--ink); line-height: 1;
 }
-.stat__num em { font-style: normal; color: var(--gold); }
+.stat__num em { font-style: normal; color: var(--gold-ink); }
 .stat__label { margin-top: .5rem; font-size: .76rem; letter-spacing: .13em; text-transform: uppercase; color: var(--muted); }
 
 /* ==========================================================================
@@ -508,13 +517,13 @@ body[data-brand="shivani"] .hero__meta { background: rgba(27,27,27,.55); }
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.15rem; margin-top: 3rem; }
 .card {
   background: var(--bg-3); border: 1px solid var(--line); border-radius: var(--radius);
-  padding: 1.9rem 1.6rem;
+  padding: 1.9rem 1.6rem; box-shadow: var(--shadow-sm);
   transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease);
 }
 .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--line-gold); }
 .card__icon {
   width: 50px; height: 50px; border-radius: 12px; display: grid; place-items: center;
-  background: rgba(204,164,59,.14); color: var(--gold); margin-bottom: 1.1rem;
+  background: rgba(204,164,59,.16); color: var(--gold-ink); margin-bottom: 1.1rem;
 }
 .card__icon svg { width: 25px; height: 25px; }
 .card h3 { font-size: 1.14rem; margin-bottom: .5rem; }
@@ -530,6 +539,33 @@ body[data-brand="shivani"] .hero__meta { background: rgba(27,27,27,.55); }
 .sec-head--center .lead { margin-inline: auto; }
 
 /* ==========================================================================
+   QUOTE BAND — a dark band
+   ========================================================================== */
+.quoteband { padding-block: clamp(3.5rem, 7vw, 5.5rem); position: relative; overflow: hidden; }
+.quoteband::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(90% 120% at 85% 0%, rgba(204,164,59,.16), transparent 60%);
+}
+.quoteband__inner { position: relative; text-align: center; max-width: 62ch; margin-inline: auto; }
+.quoteband__mark {
+  font-family: var(--f-display); font-size: 3.4rem; line-height: 1;
+  color: var(--gold); opacity: .55; display: block; margin-bottom: .4rem;
+}
+.quoteband blockquote {
+  margin: 0; font-family: var(--f-display); font-style: italic; font-weight: 400;
+  font-size: clamp(1.35rem, 3vw, 2.05rem); line-height: 1.34; color: #fff;
+}
+.quoteband cite {
+  display: block; margin-top: 1.35rem; font-family: var(--f-body); font-style: normal;
+  font-size: .74rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold);
+}
+.quoteband cite small {
+  display: block; margin-top: .4rem; font-weight: 400; letter-spacing: .1em;
+  text-transform: none; font-size: .78rem; color: var(--muted);
+}
+
+/* ==========================================================================
    GALLERY
    ========================================================================== */
 .gallery__grid {
@@ -538,37 +574,36 @@ body[data-brand="shivani"] .hero__meta { background: rgba(27,27,27,.55); }
 }
 .gallery__item {
   position: relative; overflow: hidden; border-radius: var(--radius);
-  background: var(--bg-3); cursor: zoom-in;
+  background: #DDE3EA; cursor: zoom-in;
   border: 1px solid var(--line); padding: 0; width: 100%; height: 100%; display: block;
-  text-align: left; color: #fff;
-  transition: border-color .3s var(--ease);
+  text-align: left; color: #fff; box-shadow: var(--shadow-sm);
+  transition: border-color .3s var(--ease), box-shadow .3s var(--ease);
 }
-.gallery__item:hover { border-color: var(--line-gold); }
+.gallery__item:hover { border-color: var(--line-gold); box-shadow: var(--shadow-md); }
 .gallery__item--wide { grid-column: span 2; }
 .gallery__item--tall { grid-row: span 2; }
 
 /* Painted fallback behind every tile — a tile is never an empty grey box. */
 .gallery__item::before {
   content: ""; position: absolute; inset: 0;
-  background: linear-gradient(140deg, var(--bg-3) 0%, var(--bg-deep) 60%, rgba(204,164,59,.18) 140%);
+  background: linear-gradient(140deg, #4A5A72 0%, var(--bg-deep) 65%, rgba(204,164,59,.3) 140%);
 }
 .gallery__item img {
   position: relative; width: 100%; height: 100%; object-fit: cover;
   transition: transform .8s var(--ease), opacity .5s var(--ease);
-  filter: saturate(.8);
 }
-.gallery__item:hover img { transform: scale(1.06); filter: saturate(1); }
+.gallery__item:hover img { transform: scale(1.06); }
 .gallery__cap {
   position: absolute; inset: auto 0 0 0; z-index: 2;
   padding: 1.6rem 1.2rem .95rem;
-  background: linear-gradient(to top, rgba(11,15,22,.94), transparent);
+  background: linear-gradient(to top, rgba(18,24,34,.94), transparent);
   display: flex; align-items: flex-end; justify-content: space-between; gap: .75rem;
 }
 .gallery__cap strong { font-family: var(--f-display); font-size: 1.02rem; font-weight: 600; display: block; color: #fff; }
 .gallery__cap em { font-style: normal; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
 .gallery__zoom {
   width: 32px; height: 32px; flex: none; border-radius: 50%;
-  background: var(--gold); color: #1B2230; display: grid; place-items: center;
+  background: var(--gold); color: #22201A; display: grid; place-items: center;
   opacity: 0; transform: translateY(6px); transition: opacity .3s var(--ease), transform .3s var(--ease);
 }
 .gallery__item:hover .gallery__zoom, .gallery__item:focus-visible .gallery__zoom { opacity: 1; transform: none; }
@@ -588,35 +623,34 @@ body[data-brand="shivani"] .hero__meta { background: rgba(27,27,27,.55); }
 /* lightbox */
 .lightbox {
   position: fixed; inset: 0; z-index: 200;
-  background: rgba(8,11,16,.96);
+  background: rgba(14,19,27,.96);
   display: grid; place-items: center; padding: clamp(1rem, 5vw, 3rem);
   opacity: 0; visibility: hidden; transition: opacity .28s var(--ease), visibility .28s;
 }
 .lightbox.is-open { opacity: 1; visibility: visible; }
-.lightbox__img { max-width: min(1100px, 100%); max-height: 78vh; border-radius: var(--radius); object-fit: contain; border: 1px solid var(--line-gold); }
+.lightbox__img { max-width: min(1100px, 100%); max-height: 78vh; border-radius: var(--radius); object-fit: contain; }
 .lightbox__cap { margin-top: 1rem; color: var(--gold); font-size: .9rem; text-align: center; letter-spacing: .04em; }
 .lightbox__btn {
   position: absolute; width: 48px; height: 48px; border-radius: 50%; cursor: pointer;
-  background: rgba(204,164,59,.12); border: 1px solid var(--line-gold);
+  background: rgba(204,164,59,.15); border: 1px solid rgba(204,164,59,.4);
   color: var(--gold); display: grid; place-items: center; font-size: 1.35rem; line-height: 1;
   transition: background-color .2s var(--ease), color .2s var(--ease);
 }
-.lightbox__btn:hover { background: var(--gold); color: #1B2230; }
+.lightbox__btn:hover { background: var(--gold); color: #22201A; }
 .lightbox__close { top: clamp(1rem, 3vw, 2rem); right: clamp(1rem, 3vw, 2rem); }
 .lightbox__prev { left: clamp(.75rem, 3vw, 2rem); top: 50%; transform: translateY(-50%); }
 .lightbox__next { right: clamp(.75rem, 3vw, 2rem); top: 50%; transform: translateY(-50%); }
 
 /* ==========================================================================
-   WHY CHOOSE US — the gold-lined panel that breaks up the dark run
+   WHY CHOOSE US — a dark band
    ========================================================================== */
-.why { background: var(--bg-deep); }
 .why__grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
   gap: 1px; background: var(--line);
   border: 1px solid var(--line-gold); border-radius: var(--radius); overflow: hidden;
 }
 .why__item { background: var(--bg-deep); padding: clamp(1.8rem, 3.5vw, 2.6rem); transition: background-color .35s var(--ease); }
-.why__item:hover { background: var(--bg); }
+.why__item:hover { background: rgba(255,255,255,.05); }
 .why__num {
   font-family: var(--f-display); font-size: .95rem; font-weight: 600;
   color: var(--gold); letter-spacing: .1em; margin-bottom: 1rem; display: block;
@@ -627,7 +661,6 @@ body[data-brand="shivani"] .hero__meta { background: rgba(27,27,27,.55); }
 /* ==========================================================================
    INVESTORS
    ========================================================================== */
-.inv { background: var(--bg-2); }
 .inv__grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2.5rem, 6vw, 5rem); align-items: center; }
 @media (max-width: 940px) { .inv__grid { grid-template-columns: 1fr; } }
 
@@ -635,15 +668,15 @@ body[data-brand="shivani"] .hero__meta { background: rgba(27,27,27,.55); }
 .inv__point { display: flex; gap: 1rem; align-items: flex-start; }
 .inv__point-mark {
   width: 34px; height: 34px; flex: none; border-radius: 9px; display: grid; place-items: center;
-  background: rgba(204,164,59,.14); color: var(--gold); border: 1px solid var(--line-gold);
+  background: var(--gold); color: #22201A;
 }
 .inv__point-mark svg { width: 17px; height: 17px; }
 .inv__point h4 { font-family: var(--f-body); font-size: .98rem; font-weight: 700; margin-bottom: .2rem; }
 .inv__point p { font-size: .91rem; color: var(--ink-soft); }
 
 .inv__panel {
-  background: var(--bg-deep); border: 1px solid var(--line-gold); border-radius: var(--radius);
-  padding: clamp(1.9rem, 4vw, 2.8rem); box-shadow: var(--shadow-lg);
+  border-radius: var(--radius); padding: clamp(1.9rem, 4vw, 2.8rem);
+  box-shadow: var(--shadow-lg);
 }
 .inv__panel h3 { font-size: 1.5rem; margin-bottom: .7rem; }
 .inv__panel > p { color: var(--ink-soft); font-size: .95rem; margin-bottom: 1.8rem; }
@@ -666,13 +699,13 @@ body[data-brand="shivani"] .hero__meta { background: rgba(27,27,27,.55); }
 .contact__row { display: flex; gap: 1rem; align-items: flex-start; }
 .contact__ico {
   width: 42px; height: 42px; flex: none; border-radius: 11px; display: grid; place-items: center;
-  background: rgba(204,164,59,.13); color: var(--gold); border: 1px solid var(--line-gold);
+  background: rgba(204,164,59,.16); color: var(--gold-ink);
 }
 .contact__ico svg { width: 20px; height: 20px; }
 .contact__label { font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-bottom: .2rem; }
-.contact__value { font-size: 1rem; font-weight: 600; color: #fff; }
+.contact__value { font-size: 1rem; font-weight: 600; color: var(--ink); }
 .contact__value a { border-bottom: 1px solid transparent; transition: border-color .2s, color .2s; }
-.contact__value a:hover { color: var(--gold); border-bottom-color: currentColor; }
+.contact__value a:hover { color: var(--gold-ink); border-bottom-color: currentColor; }
 .contact__value small { display: block; font-weight: 400; font-size: .87rem; color: var(--ink-soft); margin-top: .15rem; }
 
 .contact__quick { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 2.2rem; }
@@ -680,50 +713,46 @@ body[data-brand="shivani"] .hero__meta { background: rgba(27,27,27,.55); }
 
 /* form */
 .form {
-  background: var(--bg-3); border: 1px solid var(--line-gold); border-radius: var(--radius);
+  background: var(--bg-3); border: 1px solid var(--line); border-radius: var(--radius);
   padding: clamp(1.6rem, 3.5vw, 2.6rem); box-shadow: var(--shadow-md);
 }
 .form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 @media (max-width: 620px) { .form__row { grid-template-columns: 1fr; } }
 .field { display: block; margin-bottom: 1.1rem; }
 .field__label { display: block; font-size: .7rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: .45rem; }
-.field__label .req, .req { color: var(--gold); }
+.field__label .req, .req { color: var(--gold-ink); }
 .field input, .field select, .field textarea {
   width: 100%; padding: .82rem .95rem; border: 1px solid var(--line); border-radius: var(--radius-sm);
-  background: rgba(0,0,0,.28); color: #fff; font-size: .96rem;
+  background: #FBFCFD; color: var(--ink); font-size: .96rem;
   transition: border-color .2s var(--ease), box-shadow .2s var(--ease), background-color .2s var(--ease);
 }
-.field input::placeholder, .field textarea::placeholder { color: var(--muted); opacity: .8; }
+.field input::placeholder, .field textarea::placeholder { color: var(--muted); }
 .field textarea { resize: vertical; min-height: 110px; }
-.field select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23CCA43B' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right .95rem center; background-size: 12px; padding-right: 2.4rem; }
-.field select option { background: var(--bg-deep); color: #fff; }
+.field select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A6C1F' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right .95rem center; background-size: 12px; padding-right: 2.4rem; }
 .field input:focus, .field select:focus, .field textarea:focus {
-  outline: none; border-color: var(--gold);
-  background: rgba(0,0,0,.4);
-  box-shadow: 0 0 0 3px rgba(204,164,59,.2);
+  outline: none; border-color: var(--gold-deep); background: #fff;
+  box-shadow: 0 0 0 3px rgba(204,164,59,.25);
 }
-.field.has-error input, .field.has-error select, .field.has-error textarea { border-color: #E5686F; }
-.field__error { display: none; margin-top: .35rem; font-size: .78rem; color: #F09098; font-weight: 600; }
+.field.has-error input, .field.has-error select, .field.has-error textarea { border-color: #C0392B; }
+.field__error { display: none; margin-top: .35rem; font-size: .78rem; color: #C0392B; font-weight: 600; }
 .field.has-error .field__error { display: block; }
 
 .form__consent { display: flex; gap: .65rem; align-items: flex-start; font-size: .83rem; color: var(--ink-soft); margin: .3rem 0 1.4rem; }
-.form__consent input { width: 17px; height: 17px; margin-top: .2rem; flex: none; accent-color: var(--gold); }
+.form__consent input { width: 17px; height: 17px; margin-top: .2rem; flex: none; accent-color: var(--gold-deep); }
 
 .form__status { display: none; border-radius: var(--radius-sm); padding: .95rem 1.1rem; margin-bottom: 1.2rem; font-size: .92rem; }
 .form__status.is-shown { display: block; }
-.form__status a { color: var(--gold); text-decoration: underline; }
-.form__status--ok  { background: rgba(204,164,59,.12); color: #F2E6C4; border: 1px solid var(--line-gold); }
-.form__status--err { background: rgba(229,104,111,.12); color: #F6C9CC; border: 1px solid rgba(229,104,111,.4); }
+.form__status a { color: var(--gold-ink); text-decoration: underline; font-weight: 600; }
+.form__status--ok  { background: #FBF4E2; color: #5C4713; border: 1px solid var(--line-gold); }
+.form__status--err { background: #FDECEA; color: #8E2A1F; border: 1px solid rgba(192,57,43,.35); }
 
 .form__foot { font-size: .78rem; color: var(--muted); margin-top: 1rem; text-align: center; }
 
 /* ==========================================================================
-   CROSS-BRAND STRIP  (parent <-> subsidiary)
+   CROSS-BRAND STRIP
    ========================================================================== */
 .crossbrand {
-  background:
-    linear-gradient(100deg, rgba(204,164,59,.12), transparent 55%),
-    var(--bg-deep);
+  background: linear-gradient(100deg, rgba(204,164,59,.14), rgba(204,164,59,.04) 55%), var(--bg-2);
   border-block: 1px solid var(--line-gold);
 }
 .crossbrand__inner { display: grid; grid-template-columns: auto 1fr auto; gap: clamp(1.5rem, 4vw, 3rem); align-items: center; }
@@ -736,19 +765,18 @@ body[data-brand="shivani"] .hero__meta { background: rgba(27,27,27,.55); }
 .lockup { display: flex; align-items: center; gap: clamp(1rem, 3vw, 2rem); flex-wrap: wrap; }
 .lockup__unit { display: flex; align-items: center; gap: .85rem; }
 .lockup__mark { width: 56px; height: 56px; flex: none; }
-.lockup__name { font-family: var(--f-display); font-size: 1.15rem; font-weight: 700; letter-spacing: .04em; line-height: 1.1; color: #fff; }
-.lockup__name em { font-style: normal; color: var(--gold); }
+.lockup__name { font-family: var(--f-display); font-size: 1.15rem; font-weight: 700; letter-spacing: .04em; line-height: 1.1; color: var(--ink); }
+.lockup__name em { font-style: normal; color: var(--gold-ink); }
 .lockup__tag { font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; margin-top: 3px; color: var(--muted); }
 .lockup__div { width: 1px; align-self: stretch; min-height: 46px; background: var(--line-gold); }
+.lockup--onDark .lockup__name { color: #fff; }
+.lockup--onDark .lockup__name em { color: var(--gold); }
+.lockup--onDark .lockup__tag { color: rgba(255,255,255,.6); }
 
 /* ==========================================================================
-   FOOTER
+   FOOTER — a dark band
    ========================================================================== */
-.footer {
-  background: var(--bg-deep); color: var(--ink-soft);
-  padding-block: clamp(3.5rem, 6vw, 5rem) 0;
-  border-top: 1px solid var(--line-gold);
-}
+.footer { padding-block: clamp(3.5rem, 6vw, 5rem) 0; color: var(--ink-soft); }
 .footer__grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: clamp(2rem, 4vw, 3rem); }
 @media (max-width: 900px) { .footer__grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .footer__grid { grid-template-columns: 1fr; } }
@@ -766,15 +794,16 @@ body[data-brand="shivani"] .hero__meta { background: rgba(27,27,27,.55); }
 /* floating call button — mobile only */
 .floatbar {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
-  display: none; gap: 1px; background: var(--line-gold);
-  box-shadow: 0 -6px 20px rgba(0,0,0,.4);
+  display: none; gap: 1px; background: rgba(204,164,59,.4);
+  box-shadow: 0 -6px 20px rgba(36,47,64,.25);
 }
 .floatbar a {
   flex: 1; display: flex; align-items: center; justify-content: center; gap: .5rem;
   padding: .95rem .5rem; font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
-  background: var(--bg-deep); color: #fff;
+  background: var(--navy); color: #fff;
 }
-.floatbar a.is-accent { background: var(--gold); color: #1B2230; }
+body[data-brand="shivani"] .floatbar a { background: var(--charcoal); }
+.floatbar a.is-accent { background: var(--gold); color: #22201A; }
 .floatbar svg { width: 17px; height: 17px; }
 @media (max-width: 720px) {
   .floatbar { display: flex; }
@@ -782,26 +811,27 @@ body[data-brand="shivani"] .hero__meta { background: rgba(27,27,27,.55); }
 }
 
 /* ==========================================================================
-   PAGE HEADER (Shivani inner page)
+   PAGE HEADER (Shivani inner page) — a dark band
    ========================================================================== */
 .pagehead {
   position: relative; padding-top: calc(var(--nav-h) + clamp(4rem, 9vw, 7rem));
   padding-bottom: clamp(4rem, 9vw, 7rem);
-  background: var(--bg-deep); overflow: hidden; isolation: isolate;
+  overflow: hidden; isolation: isolate;
 }
 .pagehead::before {
   content: ""; position: absolute; inset: 0; z-index: -2;
   background:
-    radial-gradient(110% 80% at 82% 6%, rgba(204,164,59,.26), transparent 60%),
-    radial-gradient(80% 70% at 6% 94%, rgba(147,163,177,.14), transparent 60%),
-    linear-gradient(155deg, var(--bg) 0%, var(--bg-deep) 62%, #131313 100%);
+    radial-gradient(110% 80% at 82% 6%, rgba(204,164,59,.3), transparent 60%),
+    radial-gradient(80% 70% at 6% 94%, rgba(147,163,177,.16), transparent 60%),
+    linear-gradient(155deg, #3C3C3C 0%, var(--bg-deep) 62%, #1A1A1A 100%);
 }
 .pagehead__media {
   position: absolute; inset: 0; z-index: -3;
-  background-size: cover; background-position: center;
-  opacity: .22; filter: saturate(.6);
+  background-size: cover; background-position: center; opacity: .2;
 }
-.pagehead h1 { max-width: 20ch; margin-bottom: 1.2rem; }
+.pagehead .eyebrow { color: var(--gold); }
+.pagehead h1 { color: #fff; max-width: 20ch; margin-bottom: 1.2rem; }
+.pagehead h1 .accent-italic { color: var(--gold); }
 .pagehead p { color: var(--ink-soft); max-width: 60ch; }
 .pagehead .lockup { margin-bottom: 2.4rem; }
 
