@@ -644,20 +644,38 @@ body[data-brand="shivani"] .hero__meta { background: rgba(25,25,25,.55); }
 /* ==========================================================================
    WHY CHOOSE US — a dark band
    ========================================================================== */
+/* two labelled groups: Quality & Craftsmanship, then Trust & Reliability */
+.why__group + .why__group { margin-top: clamp(2.25rem, 4.5vw, 3.5rem); }
+.why__group-title {
+  display: flex; align-items: center; gap: .85rem;
+  font-family: var(--f-body); font-size: .78rem; font-weight: 700;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1.15rem;
+}
+.why__group-title span {
+  width: 26px; height: 26px; flex: none; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--gold); color: #22201A;
+  font-family: var(--f-display); font-size: .8rem; letter-spacing: 0;
+}
+.why__group-title::after { content: ""; flex: 1; height: 1px; background: var(--line-gold); }
+
 .why__grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(228px, 1fr));
   gap: 1px; background: var(--line);
   border: 1px solid var(--line-gold); border-radius: var(--radius); overflow: hidden;
 }
-.why__item { background: var(--bg-deep); padding: clamp(1.8rem, 3.5vw, 2.6rem); transition: background-color .35s var(--ease); }
+.why__item { background: var(--bg-deep); padding: clamp(1.5rem, 2.8vw, 2.1rem); transition: background-color .35s var(--ease); }
 .why__item:hover { background: rgba(255,255,255,.05); }
 .why__num {
   font-family: var(--f-display); font-size: .95rem; font-weight: 600;
-  color: var(--gold); letter-spacing: .1em; margin-bottom: 1rem; display: block;
+  color: var(--gold); letter-spacing: .1em; margin-bottom: .85rem; display: block;
 }
-.why__item h3 { font-size: 1.18rem; margin-bottom: .65rem; }
-.why__item p { font-size: .94rem; color: var(--ink-soft); }
-
+.why__item h3, .why__item h4 {
+  font-family: var(--f-display); font-weight: 600;
+  font-size: 1.12rem; margin-bottom: .55rem; color: var(--ink);
+}
+.why__item p { font-size: .93rem; color: var(--ink-soft); }
 /* ==========================================================================
    INVESTORS
    ========================================================================== */
