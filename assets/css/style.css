@@ -581,6 +581,7 @@ body[data-brand="shivani"] .hero__meta { background: rgba(25,25,25,.55); }
 }
 .gallery__item:hover { border-color: var(--line-gold); box-shadow: var(--shadow-md); }
 .gallery__item--wide { grid-column: span 2; }
+.gallery__item--big  { grid-column: span 2; grid-row: span 2; }
 .gallery__item--tall { grid-row: span 2; }
 
 /* Painted fallback behind every tile — a tile is never an empty grey box. */
@@ -609,10 +610,11 @@ body[data-brand="shivani"] .hero__meta { background: rgba(25,25,25,.55); }
 .gallery__item:hover .gallery__zoom, .gallery__item:focus-visible .gallery__zoom { opacity: 1; transform: none; }
 .gallery__zoom svg { width: 15px; height: 15px; }
 
-@media (max-width: 900px) { .gallery__grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; } }
+@media (max-width: 900px) { .gallery__grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; }
+  .gallery__item--big { grid-column: span 2; grid-row: span 1; } }
 @media (max-width: 560px) {
   .gallery__grid { grid-template-columns: 1fr; grid-auto-rows: 220px; }
-  .gallery__item--wide, .gallery__item--tall { grid-column: auto; grid-row: auto; }
+  .gallery__item--wide, .gallery__item--tall, .gallery__item--big { grid-column: auto; grid-row: auto; }
 }
 
 .gallery__note {
