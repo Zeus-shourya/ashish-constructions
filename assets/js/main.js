@@ -15,12 +15,18 @@
   var CONFIG = {
     phone:        '7027929161',
     phoneIntl:    '917027929161',            // for wa.me — country code, no +
-    email:        'Mailtoashish29@gmail.com',
-    // FormSubmit needs a ONE-TIME activation: submit the form once, then click
-    // the confirmation link Google sends to the inbox above. Until that is
-    // done (or if it ever fails) the form falls back to WhatsApp — see below.
-    endpoint:     'https://formsubmit.co/ajax/Mailtoashish29@gmail.com'
+    // Each page can carry its own inbox: Ashish Constructions uses the address
+    // below, Shivani Properties overrides it with data-email on <body>.
+    email:        'Mailtoashish29@gmail.com'
   };
+
+  var pageEmail = document.body && document.body.getAttribute('data-email');
+  if (pageEmail) CONFIG.email = pageEmail;
+
+  // FormSubmit needs a ONE-TIME activation PER ADDRESS: submit the form once,
+  // then click the confirmation link sent to that inbox. Until that is done
+  // (or if it ever fails) the form falls back to WhatsApp — see below.
+  CONFIG.endpoint = 'https://formsubmit.co/ajax/' + CONFIG.email;
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var $  = function (s, c) { return (c || document).querySelector(s); };
