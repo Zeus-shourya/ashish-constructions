@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /serve.ps1
+
+Sitemap: https://ashishconstruction.com/sitemap.xml
